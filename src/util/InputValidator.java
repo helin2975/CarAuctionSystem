@@ -2,10 +2,6 @@ package util;
 
 import java.util.Scanner;
 
-/**
- * Utility for safe terminal input reading with validation.
- * Demonstrates: Utility class, encapsulation of I/O logic
- */
 public class InputValidator {
 
     private Scanner scanner;
@@ -29,7 +25,8 @@ public class InputValidator {
     public int readIntInRange(String prompt, int min, int max) {
         while (true) {
             int val = readInt(prompt);
-            if (val >= min && val <= max) return val;
+            if (val >= min && val <= max)
+                return val;
             System.out.printf("  Please enter a number between %d and %d.%n", min, max);
         }
     }
@@ -39,8 +36,9 @@ public class InputValidator {
             System.out.print(prompt);
             try {
                 String line = scanner.nextLine().trim();
-                double val  = Double.parseDouble(line);
-                if (val < 0) throw new NumberFormatException();
+                double val = Double.parseDouble(line);
+                if (val < 0)
+                    throw new NumberFormatException();
                 return val;
             } catch (NumberFormatException e) {
                 System.out.println("  Invalid input. Please enter a valid positive number.");
@@ -52,7 +50,8 @@ public class InputValidator {
         while (true) {
             System.out.print(prompt);
             String line = scanner.nextLine().trim();
-            if (!line.isEmpty()) return line;
+            if (!line.isEmpty())
+                return line;
             System.out.println("  Input cannot be empty.");
         }
     }
@@ -66,8 +65,10 @@ public class InputValidator {
         while (true) {
             System.out.print(prompt + " (y/n): ");
             String line = scanner.nextLine().trim().toLowerCase();
-            if (line.equals("y") || line.equals("yes")) return true;
-            if (line.equals("n") || line.equals("no"))  return false;
+            if (line.equals("y") || line.equals("yes"))
+                return true;
+            if (line.equals("n") || line.equals("no"))
+                return false;
             System.out.println("  Please enter y or n.");
         }
     }
