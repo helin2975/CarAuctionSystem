@@ -1,17 +1,14 @@
 package model;
-
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
-
-
-public class Auction  {
-
+public class Auction implements Serializable {
+    private static final long serialVersionUID = 1L;
     private static final DateTimeFormatter FMT =
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-
     private String        auctionId;
     private String        vehicleId;
     private String        vehicleDescription;
@@ -27,17 +24,14 @@ public class Auction  {
     private String        winnerId;
     private String        winnerName;
     private double        winningAmount;
-
     private PriorityQueue<Bid> bids;
     private List<String>       registeredBidderIds;
-
     public Auction(String auctionId, String vehicleId, String vehicleDescription,
                    double startingPrice, double minimumBidIncrement) {
         if (startingPrice <= 0)
             throw new IllegalArgumentException("Starting price must be positive.");
         if (minimumBidIncrement <= 0)
             throw new IllegalArgumentException("Minimum bid increment must be positive.");
-
         this.auctionId            = auctionId;
         this.vehicleId            = vehicleId;
         this.vehicleDescription   = vehicleDescription;
@@ -49,21 +43,17 @@ public class Auction  {
         this.bids                 = new PriorityQueue<>();
         this.registeredBidderIds  = new ArrayList<>();
     }
-
     public void openAuction() {
         this.status   = AuctionStatus.OPEN;
         this.openedAt = LocalDateTime.now();
     }
-
     public void closeAuction() {
         this.status   = AuctionStatus.CLOSED;
         this.closedAt = LocalDateTime.now();
     }
-
     public void cancelAuction() {
         this.status = AuctionStatus.CANCELLED;
     }
-
     public void declareWinner() {
         if (bids.isEmpty()) {
             this.status = AuctionStatus.CANCELLED;
@@ -75,29 +65,24 @@ public class Auction  {
         this.winningAmount  = topBid.getAmount();
         this.status         = AuctionStatus.COMPLETED;
     }
-
     public void addBid(Bid bid) {
         bids.add(bid);
         this.currentHighestBid        = bid.getAmount();
         this.currentHighestBidderId   = bid.getBidderId();
         this.currentHighestBidderName = bid.getBidderName();
     }
-
     public void registerBidder(String bidderId) {
         if (!registeredBidderIds.contains(bidderId))
             registeredBidderIds.add(bidderId);
     }
-
     public boolean isBidderRegistered(String bidderId) {
         return registeredBidderIds.contains(bidderId);
     }
-
     public List<Bid> getAllBidsSorted() {
         List<Bid> sorted = new ArrayList<>(bids);
         sorted.sort((a, b) -> Double.compare(b.getAmount(), a.getAmount()));
         return sorted;
     }
-
     public String        getAuctionId()               { return auctionId; }
     public String        getVehicleId()               { return vehicleId; }
     public String        getVehicleDescription()      { return vehicleDescription; }
@@ -113,7 +98,6 @@ public class Auction  {
     public double        getWinningAmount()            { return winningAmount; }
     public int           getTotalBids()               { return bids.size(); }
     public List<String>  getRegisteredBidderIds()     { return registeredBidderIds; }
-
     @Override
     public String toString() {
         return String.format(
