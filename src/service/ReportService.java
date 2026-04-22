@@ -31,6 +31,7 @@ public class ReportService {
             System.out.println("  No vehicles registered.");
         } else {
             for (Vehicle v : vehicles) {
+                System.out.println("  ID: " + v.getVehicleId());
                 System.out.println("  " + v.getVehicleDetails());
                 System.out.printf("  Available: %s | Reg. Fee: Rs %.2f%n",
                         v.isAvailable() ? "Yes" : "No",
@@ -49,6 +50,7 @@ public class ReportService {
             System.out.println("  No vehicles currently available.");
         } else {
             for (Vehicle v : vehicles) {
+                System.out.println("  ID: " + v.getVehicleId());
                 System.out.println("  " + v.getVehicleDetails());
                 System.out.println(line('-', 70));
             }

@@ -134,7 +134,7 @@ public class AuctionService implements Auctionable {
         auction.addBid(bid);
         bidder.addBidRecord(bid.toString());
 
-        System.out.printf("  Bid placed: %s by %s — Rs %.2f%n",
+        System.out.printf("  Bid placed: %s by %s - Rs %.2f%n",
                 bidId, bidder.getName(), amount);
     }
 

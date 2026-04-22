@@ -35,7 +35,7 @@ public class Bid implements Comparable<Bid>, Serializable {
     public LocalDateTime getTimestamp()  { return timestamp; }
     @Override
     public String toString() {
-        return String.format("Bid[%s] by %s — Rs %.2f at %s",
+        return String.format("Bid[%s] by %s - Rs %.2f at %s",
                 bidId, bidderName, amount, timestamp.format(FMT));
     }
 }

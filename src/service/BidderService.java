@@ -26,7 +26,7 @@ public class BidderService implements interfaces.Payable {
         String id = generateBidderId();
         Bidder bidder = new Bidder(id, name, email, phone, password, initialBalance);
         bidderMap.put(id, bidder);
-        System.out.println("  Bidder registered: " + id + " — " + name);
+        System.out.println("  Bidder registered: " + id + " - " + name);
         return bidder;
     }
 
