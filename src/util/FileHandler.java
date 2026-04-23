@@ -27,7 +27,7 @@ public class FileHandler {
         try (ObjectOutputStream oos =
                      new ObjectOutputStream(new FileOutputStream(filePath))) {
             oos.writeObject(obj);
-            System.out.println("  [Saved] " + label + " → " + filePath);
+            System.out.println("  [Saved] " + label + " - " + filePath);
         } catch (IOException e) {
             System.out.println("  [Error] Could not save " + label + ": " + e.getMessage());
         }
@@ -57,7 +57,7 @@ public class FileHandler {
         try (ObjectInputStream ois =
                      new ObjectInputStream(new FileInputStream(filePath))) {
             Object obj = ois.readObject();
-            System.out.println("  [Loaded] " + label + " ← " + filePath);
+            System.out.println("  [Loaded] " + label + " - " + filePath);
             return obj;
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("  [Error] Could not load " + label + ": " + e.getMessage());
